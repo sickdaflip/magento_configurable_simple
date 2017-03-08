@@ -338,19 +338,17 @@ Product.OptionsPrice.prototype.reloadPriceLabels = function(productPriceIsKnown)
     var priceSpanId = 'configurable-price-from-' + this.productId;
     var duplicatePriceSpanId = priceSpanId + this.duplicateIdSuffix;
 
-    if($(priceSpanId) && $(priceSpanId).select('span.configurable-price-from-label'))
-        $(priceSpanId).select('span.configurable-price-from-label').each(function(label) {
-        label.innerHTML = priceFromLabel;
-    });
+    //if($(priceSpanId) && $(priceSpanId).select('span.configurable-price-from-label'))
+    //    $(priceSpanId).select('span.configurable-price-from-label').each(function(label) {
+    //    label.innerHTML = priceFromLabel;
+    //});
 
-    if ($(duplicatePriceSpanId) && $(duplicatePriceSpanId).select('span.configurable-price-from-label')) {
-        $(duplicatePriceSpanId).select('span.configurable-price-from-label').each(function(label) {
-            label.innerHTML = priceFromLabel;
-        });
-    }
+    //if ($(duplicatePriceSpanId) && $(duplicatePriceSpanId).select('span.configurable-price-from-label')) {
+    //    $(duplicatePriceSpanId).select('span.configurable-price-from-label').each(function(label) {
+    //        label.innerHTML = priceFromLabel;
+    //    });
+    //}
 };
-
-
 
 //SCP: Forces the 'next' element to have it's optionLabels reloaded too
 Product.Config.prototype.configureElement = function(element) {
