@@ -76,11 +76,7 @@
                     <product_view_attributes>OrganicInternet_SimpleConfigurableProducts_Catalog_Block_Product_View_Attributes</product_view_attributes>
                 </rewrite>
             </catalog>
-            <checkout>
-                <rewrite>
-                    <cart_item_renderer>OrganicInternet_SimpleConfigurableProducts_Checkout_Block_Cart_Item_Renderer</cart_item_renderer>
-                </rewrite>
-            </checkout>
+
             <rss>
                 <rewrite>
                     <wishlist>OrganicInternet_SimpleConfigurableProducts_Rss_Block_Wishlist</wishlist>

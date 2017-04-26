@@ -14,8 +14,11 @@ class OrganicInternet_SimpleConfigurableProducts_Catalog_Block_Product_View_Type
             $productId  = $product->getId();
             $childProducts[$productId] = array(
                 "price" => $this->_registerJsPrice($this->_convertPrice($product->getPrice())),
-                "finalPrice" => $this->_registerJsPrice($this->_convertPrice($product->getFinalPrice()))
+                "finalPrice" => $this->_registerJsPrice($this->_convertPrice($product->getFinalPrice())),
+                "msrp" => Mage::helper('core')->currency($product->getMsrp())
             );
+
+            $childProducts[$productId]["productSku"] = $product->getSku();
 
             if (Mage::getStoreConfig('SCP_options/product_page/change_name')) {
                 $childProducts[$productId]["productName"] = $product->getName();

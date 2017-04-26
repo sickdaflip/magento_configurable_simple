@@ -154,10 +154,11 @@ Product.Config.prototype.reloadPrice = function() {
     if(childProductId){
         var price = childProducts[childProductId]["price"];
         var finalPrice = childProducts[childProductId]["finalPrice"];
+        var msrp = childProducts[childProductId]["msrp"];
         optionsPrice.productPrice = finalPrice;
         optionsPrice.productOldPrice = price;
+        optionsPrice.msrp = msrp;
         optionsPrice.reload();
-        optionsPrice.reloadPriceLabels(true);
         optionsPrice.updateSpecialPriceDisplay(price, finalPrice);
         this.updateProductShortDescription(childProductId);
         this.updateProductDescription(childProductId);
@@ -167,15 +168,17 @@ Product.Config.prototype.reloadPrice = function() {
         this.addParentProductIdToCartForm(this.config.productId);
         this.showCustomOptionsBlock(childProductId, this.config.productId);
         this.updateProductImage(childProductId);
+        this.updateProductSku(childProductId);
     } else {
         var cheapestPid = this.getProductIdOfCheapestProductInScope("finalPrice");
         //var mostExpensivePid = this.getProductIdOfMostExpensiveProductInScope("finalPrice");
         var price = childProducts[cheapestPid]["price"];
         var finalPrice = childProducts[cheapestPid]["finalPrice"];
+        var msrp = childProducts[cheapestPid]["msrp"];
         optionsPrice.productPrice = finalPrice;
         optionsPrice.productOldPrice = price;
+        optionsPrice.msrp = msrp;
         optionsPrice.reload();
-        optionsPrice.reloadPriceLabels(false);
         optionsPrice.updateSpecialPriceDisplay(price, finalPrice);
         this.updateProductShortDescription(false);
         this.updateProductDescription(false);
@@ -183,10 +186,18 @@ Product.Config.prototype.reloadPrice = function() {
         this.updateProductAttributes(false);
         this.showCustomOptionsBlock(false, false);
         this.updateProductImage(false);
+        this.updateProductSku(false);
     }
 };
 
-
+Product.Config.prototype.updateProductSku = function(productId) {
+    if (productId && this.config.childProducts[productId].productSku) {
+        productSku = this.config.childProducts[productId].productSku;
+        $$('p.sku span').each(function(el) {
+            el.innerHTML = productSku;
+        });
+    }
+};
 
 Product.Config.prototype.updateProductImage = function(productId) {
     var imageUrl = this.config.imageUrl;
@@ -323,31 +334,6 @@ Product.Config.prototype.showFullImageDiv = function(productId, parentId) {
         destElement.innerHTML = defaultZoomer;
         product_zoom = new Product.Zoom('image', 'track', 'handle', 'zoom_in', 'zoom_out', 'track_hint');
     }
-};
-
-
-
-Product.OptionsPrice.prototype.reloadPriceLabels = function(productPriceIsKnown) {
-    var priceFromLabel = '';
-    var prodForm = $('product_addtocart_form');
-
-    if (!productPriceIsKnown && typeof spConfig != "undefined") {
-        priceFromLabel = spConfig.config.priceFromLabel;
-    }
-
-    var priceSpanId = 'configurable-price-from-' + this.productId;
-    var duplicatePriceSpanId = priceSpanId + this.duplicateIdSuffix;
-
-    //if($(priceSpanId) && $(priceSpanId).select('span.configurable-price-from-label'))
-    //    $(priceSpanId).select('span.configurable-price-from-label').each(function(label) {
-    //    label.innerHTML = priceFromLabel;
-    //});
-
-    //if ($(duplicatePriceSpanId) && $(duplicatePriceSpanId).select('span.configurable-price-from-label')) {
-    //    $(duplicatePriceSpanId).select('span.configurable-price-from-label').each(function(label) {
-    //        label.innerHTML = priceFromLabel;
-    //    });
-    //}
 };
 
 //SCP: Forces the 'next' element to have it's optionLabels reloaded too
