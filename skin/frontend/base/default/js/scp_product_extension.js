@@ -221,6 +221,7 @@ Product.Config.prototype.updateProductImage = function(productId) {
         $$('#product_addtocart_form .product-image a').each(function(el) {
             el.href = imageUrl;
         });
+        $$()
     }
 };
 

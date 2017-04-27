@@ -35,14 +35,13 @@ class OrganicInternet_SimpleConfigurableProducts_Checkout_Block_Cart_Item_Render
 
     public function getProductName()
     {
-        if (Mage::getStoreConfig('SCP_options/cart/show_configurable_product_name')
+        if (!Mage::getStoreConfig('SCP_options/cart/show_configurable_product_name')
             && $this->getConfigurableProductParentId()) {
             return $this->getConfigurableProductParent()->getName();
         } else {
             return parent::getProductName();
         }
     }
-
 
     /* Bit of a hack this - assumes configurable parent is always linkable */
     public function hasProductUrl()
@@ -105,7 +104,7 @@ class OrganicInternet_SimpleConfigurableProducts_Checkout_Block_Cart_Item_Render
 
 
         #If showing simple product image
-        if (!Mage::getStoreConfig('SCP_options/cart/show_configurable_product_image')) {
+        if (Mage::getStoreConfig('SCP_options/cart/show_configurable_product_image')) {
             $product = $this->getProduct();
             #if product image is not a thumbnail
             if($product->getData('thumbnail') && ($product->getData('thumbnail') != 'no_selection')) {

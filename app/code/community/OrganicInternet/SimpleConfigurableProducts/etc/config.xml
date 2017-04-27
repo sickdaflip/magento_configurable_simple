@@ -94,6 +94,11 @@
                     <catalog_category>OrganicInternet_SimpleConfigurableProducts_Rss_Block_Catalog_Category</catalog_category>
                 </rewrite>
             </rss>
+            <checkout>
+                <rewrite>
+                    <cart_item_renderer>OrganicInternet_SimpleConfigurableProducts_Checkout_Block_Cart_Item_Renderer</cart_item_renderer>
+                </rewrite>
+            </checkout>
         </blocks>
     </global>
     <frontend>
