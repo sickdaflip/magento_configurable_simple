@@ -281,22 +281,17 @@ Product.Config.prototype.showCustomOptionsBlock = function(productId, parentId) 
     if(productId) {
         //Uncomment the line below if you want an ajax loader to appear while any custom
         //options are being loaded.
-<<<<<<< HEAD
         $$('#reveal-wait').each(function(el) {el.show()});
-=======
         //$$('span.scp-please-wait').each(function(el) {el.show()});
->>>>>>> 6dee8acb2ccfca1b75d67c32c0d2e7551c02f33a
 
         //prodForm.getElements().each(function(el) {el.disable()});
         new Ajax.Updater('SCPcustomOptionsDiv', coUrl, {
           method: 'get',
           evalScripts: true,
           onComplete: function() {
-<<<<<<< HEAD
+
               $$('#reveal-wait').each(function(el) {el.hide()});
-=======
               $$('span.scp-please-wait').each(function(el) {el.hide()});
->>>>>>> 6dee8acb2ccfca1b75d67c32c0d2e7551c02f33a
               Effect.Fade('SCPcustomOptionsDiv', { duration: 0.5, from: 0.5, to: 1 });
               //prodForm.getElements().each(function(el) {el.enable()});
           }
